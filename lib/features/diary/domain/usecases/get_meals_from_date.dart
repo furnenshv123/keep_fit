@@ -3,7 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:keep_fit/core/errors/failure.dart';
 import 'package:keep_fit/core/usecase/usecase.dart';
 import 'package:keep_fit/features/diary/domain/entities/meal_entity.dart';
-import 'package:keep_fit/features/diary/domain/repositories/abstract_repositories.dart';
+import 'package:keep_fit/features/diary/domain/repositories/meal_repository.dart';
+
 
 class GetMealsFromDate extends Usecase<List<MealEntity>, GetMealsParams> {
   final MealRepository _mealRepostory;

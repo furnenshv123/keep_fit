@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:keep_fit/core/errors/failure.dart';
-import 'package:keep_fit/features/diary/domain/entities/meal_entity.dart';
-import 'package:keep_fit/features/diary/domain/repositories/abstract_repositories.dart';
 
-class GetAllIngredients{
+import 'package:keep_fit/features/diary/domain/entities/ingredient_entity.dart';
+
+import 'package:keep_fit/features/diary/domain/repositories/ingredient_repository.dart';
+
+class GetAllIngredients{ 
   
 
   GetAllIngredients({required IngredientRepository ingredientRepository}):_ingredientRepository = ingredientRepository;

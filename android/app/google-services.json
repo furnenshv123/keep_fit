@@ -7,25 +7,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:848251963424:android:ec3e59e7c8bccfc7a05445",
-        "android_client_info": {
-          "package_name": "com.google.fierbase.keep"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAUsbdPLK-ScaIGUnGP9C7NNW0Im5qhxdA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:848251963424:android:bd3aeaf05416649fa05445",
         "android_client_info": {
           "package_name": "com.google.firebase.keep"
@@ -45,9 +26,28 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:848251963424:android:890e5331ee37caf4a05445",
+        "mobilesdk_app_id": "1:848251963424:android:491e575da8472f46a05445",
         "android_client_info": {
-          "package_name": "firebase.keep.app"
+          "package_name": "firebase.com.keep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUsbdPLK-ScaIGUnGP9C7NNW0Im5qhxdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848251963424:android:bebcd83d33b96a35a05445",
+        "android_client_info": {
+          "package_name": "keepfit.google.firebase.com"
         }
       },
       "oauth_client": [],
