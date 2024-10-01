@@ -8,7 +8,8 @@ class IngredientModel extends IngredientEntity {
       required super.weight,
       required super.proteins,
       required super.carbohydrates,
-      required super.fats});
+      required super.fats,
+      required super.urlPicture});
 
   factory IngredientModel.fromJson(Map<String, dynamic> json) =>
       IngredientModel(
@@ -18,5 +19,6 @@ class IngredientModel extends IngredientEntity {
           weight: json['weight'] ?? 0,
           proteins: json['proteins'] ?? 0,
           carbohydrates: json['carbohydrates'] ?? 0,
-          fats: json['fats']?? 0);
+          fats: json['fats']?? 0,
+          urlPicture: json['urlPicture']?? 0);
 }

@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_fit/config/locator/locator.dart';
-import 'package:keep_fit/features/profile/data/models/user_model.dart';
-import 'package:keep_fit/features/profile/domain/usecases/auth/signup_usecase.dart';
+import 'package:keep_fit/features/auth/data/models/user_model.dart';
+import 'package:keep_fit/features/auth/domain/usecases/auth/signup_usecase.dart';
 
 @RoutePage()
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<AuthScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
@@ -20,41 +20,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 labelText: 'Username'),
             controller: _usernameController,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 labelText: 'Email'),
             controller: _emailController,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 labelText: 'Password'),
             controller: _passwordController,
             obscureText: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          ElevatedButton(
+           ElevatedButton(
               onPressed: () async {
                 var result = await getInstance<SignupUsecase>().call(UserModel(
                     username: _usernameController.text,
@@ -68,8 +68,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }); 
               },
               child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 100),
-                  child: Text('Регистрация')))
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
+                  child: const Text('Регистрация')))
         ],
       ),
     );

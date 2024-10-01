@@ -11,11 +11,12 @@ void main() async{
 );
 
   await initializeDependencies();
+  
   runApp(KeepFitApp());
 }
 
 class KeepFitApp extends StatelessWidget {
-  KeepFitApp ({super.key});
+  KeepFitApp ({super.key, });
 
   final _router = AppRouter();
   @override

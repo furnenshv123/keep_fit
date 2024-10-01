@@ -10,6 +10,7 @@ class MealEntity extends Equatable {
   final double allCarbohydrates;
   final double allFats;
   final List<IngredientEntity> ingredients;
+  final DateTime date;
   MealEntity(
       {required this.id,required this.ingredients,
       required this.allCalories,
@@ -17,7 +18,8 @@ class MealEntity extends Equatable {
       required this.allWeight,
       required this.allProteins,
       required this.allCarbohydrates,
-      required this.allFats});
+      required this.allFats,
+      required this.date});
 
   @override
   // TODO: implement props
@@ -29,6 +31,7 @@ class MealEntity extends Equatable {
         allWeight,
         name,
         ingredients,
-        id
+        id,
+        date
       ];
 }
