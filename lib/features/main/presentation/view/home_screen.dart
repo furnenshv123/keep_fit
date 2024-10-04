@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
 import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_item.dart';
+import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_widget.dart';
+import 'package:keep_fit/features/main/presentation/widgets/model_nav_bar.dart';
 import 'package:keep_fit/icons/app_icons.dart';
 import 'package:keep_fit/themes/colors.dart';
 
@@ -27,39 +29,21 @@ class _HomeScreenState extends State<HomeScreen> {
           AppIcons.weight,
           AppIcons.user_outline
         ];
-        final ListOfNames = ['Diary', 'Weighing', 'Profile'];
-
+        const  listOfModels = [
+          ModelNavBar(icon: AppIcons.vector__1_, name: 'Diary'),
+          ModelNavBar(icon: AppIcons.weight, name: 'Weight'),
+          ModelNavBar(icon: AppIcons.user_outline, name: 'Profile'),
+        ];
+        int selectedIndex = tabsRouter.activeIndex;
         return Scaffold(
             body: child,
-            bottomNavigationBar: SafeArea(
-              child: Container(
-                margin:
-                    EdgeInsets.only(bottom: 15, right: 24, left: 24, top: 16),
-                height: 63,
-                decoration: const BoxDecoration(
-                    color: AppColors.blackAppColor,
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                    border: Border(
-                        top:
-                            BorderSide(color: AppColors.bordersColor, width: 3),
-                        left:
-                            BorderSide(color: AppColors.bordersColor, width: 3),
-                        right:
-                            BorderSide(color: AppColors.bordersColor, width: 3),
-                        bottom: BorderSide(
-                            color: AppColors.bordersColor, width: 3))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                      ListOfIcons.length,
-                      (index) => BottomNavBarItem(
-                            dataIcon: ListOfIcons[index],
-                            nameItem: ListOfNames[index],
-                            indexPage: index,
-                          )),
-                ),
-              ),
-            ));
+            bottomNavigationBar: BottomNavBarWidget(
+                items: listOfModels,
+                onTap: (value) {
+                  selectedIndex = value;
+                  _setCurrentIndex(selectedIndex, tabsRouter);
+                },
+                currentIndex: selectedIndex));
       },
     );
   }

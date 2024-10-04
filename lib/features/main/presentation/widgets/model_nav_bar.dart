@@ -4,5 +4,5 @@ class ModelNavBar {
   final IconData icon;
   final String name;
 
-  ModelNavBar({required this.icon, required this.name});
+  const ModelNavBar({required this.icon, required this.name});
 }

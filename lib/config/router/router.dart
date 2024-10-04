@@ -10,7 +10,8 @@ class AppRouter extends RootStackRouter{
     AutoRoute(page: HomeRoute.page, path: '/', children: [
       AutoRoute(page: DiaryRoute.page, path: 'diary'),
       AutoRoute(page: WeightRoute.page, path: 'weight'),
-      AutoRoute(page: AuthRoute.page, path: 'profile')
+      AutoRoute(page: AuthRoute.page, path: 'signup', ),
+      AutoRoute(page: SignInRoute.page, path: 'signin')
     ]),
   ];
 
