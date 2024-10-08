@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
+import 'package:keep_fit/themes/colors.dart';
 
 
 
@@ -15,7 +17,14 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber,
+      decoration: const BoxDecoration(
+        gradient: AppColors.gradientApp
+      ),
+      child: Column(
+        children: [
+          
+        ],
+      ),
     );
   }
 }

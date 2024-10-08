@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:keep_fit/config/locator/locator.dart';
+
 import 'package:keep_fit/config/router/router.gr.dart';
-import 'package:keep_fit/features/auth/data/models/user_model.dart';
-import 'package:keep_fit/features/auth/domain/usecases/auth/signup_usecase.dart';
+
 import 'package:keep_fit/features/auth/presentation/widgets/button_widget_app.dart';
-import 'package:keep_fit/features/auth/presentation/widgets/change_auth_mode.dart';
+
 import 'package:keep_fit/features/auth/presentation/widgets/text_field_widget.dart';
+import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
 import 'package:keep_fit/themes/colors.dart';
 
 @RoutePage()
@@ -26,17 +26,13 @@ class _ProfileScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.secondForGradient, Color.fromRGBO(50, 65, 65, 1)],
-        ),
+        gradient: AppColors.gradientApp
       ),
       padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        
         children: [
-          const SizedBox(
-            height: 90,
-          ),
+         
           const Divider(),
           const Text(
             'Welcome!',
@@ -87,12 +83,11 @@ class _ProfileScreenState extends State<AuthScreen> {
                 TextButton(
                     onPressed: () {
                         
-                        AutoRouter.of(context).navigate(SignInRoute());
-                      
+                        AutoRouter.of(context).replace(const SignInRoute());
                     },
                     child: const Text(
                       'Sign in',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontFamily: "Hanken",
                           color: AppColors.dedicatedText,
                           fontSize: 20),

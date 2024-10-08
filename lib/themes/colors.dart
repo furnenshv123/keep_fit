@@ -8,4 +8,9 @@ class AppColors{
   static const Color defaultText = Color(0xff8D9E78);
   static const Color dedicatedText = Color(0xff49B04D);
   static const Color unselectedBarItem = Color(0xff393939);
+  static const Gradient gradientApp = LinearGradient(colors: [
+secondForGradient,    
+    firstForGradient,
+    
+  ]);
 }

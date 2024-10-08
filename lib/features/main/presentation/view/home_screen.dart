@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
 import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_item.dart';
 import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_widget.dart';
+import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
 import 'package:keep_fit/features/main/presentation/widgets/model_nav_bar.dart';
 import 'package:keep_fit/icons/app_icons.dart';
 import 'package:keep_fit/themes/colors.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
-      routes: [DiaryRoute(), WeightRoute(), AuthRoute()],
+      routes: [DiaryRoute(), WeightRoute(), AuthNavigationRoute()],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         final ListOfIcons = [
@@ -36,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ];
         int selectedIndex = tabsRouter.activeIndex;
         return Scaffold(
+            appBar: const PreferredSize(preferredSize: Size(double.infinity, 150), child:  MainLogoApp()),
             body: child,
+            extendBody: true,
+            extendBodyBehindAppBar: true,
             bottomNavigationBar: BottomNavBarWidget(
                 items: listOfModels,
                 onTap: (value) {

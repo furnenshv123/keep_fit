@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
+import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
 
 import '../../../../themes/colors.dart';
 import '../widgets/button_widget_app.dart';
-import '../widgets/change_auth_mode.dart';
+
 import '../widgets/text_field_widget.dart';
 
 
@@ -24,17 +25,13 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.secondForGradient, Color.fromRGBO(50, 65, 65, 1)],
-        ),
+        gradient: AppColors.gradientApp
       ),
       padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        
         children: [
-          const SizedBox(
-            height: 90,
-          ),
+          
           const Divider(),
           const Text(
             'Welcome!',
@@ -61,12 +58,30 @@ class _SignInScreenState extends State<SignInScreen> {
           const SizedBox(height: 30,),
           const ButtonWidgetApp(labelText: 'Sign in', height: 56, width: double.infinity, fontSize: 25),
           const SizedBox(height: 5,),
-          ChangeAuthMode(mode: 'Sign up', change: (){
-            setState(() {
-              
-              context.router.navigate(AuthRoute());
-            });
-          },)
+          Container(
+
+            child: Row(
+              children: [
+                const Text(
+                  "You don't have an account?",
+                  style: TextStyle(
+                      fontFamily: "Hanken", color: Colors.white, fontSize: 20),
+                ),
+                TextButton(
+                    onPressed: () {
+                        
+                        AutoRouter.of(context).replace(const AuthRoute());
+                    },
+                    child: const Text(
+                      'Sign up',
+                      style: const TextStyle(
+                          fontFamily: "Hanken",
+                          color: AppColors.dedicatedText,
+                          fontSize: 20),
+                    ))
+              ],
+            ),
+          )
         ],
       ),
     );

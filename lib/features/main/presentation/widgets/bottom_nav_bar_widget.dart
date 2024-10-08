@@ -28,17 +28,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       width: double.infinity,
       
       decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [
-          
-          AppColors.secondForGradient,
-          Color.fromRGBO(50, 65, 65, 1),
-        ],
-        begin: Alignment.bottomLeft,
-        end: Alignment.topRight)
+        color: Colors.transparent,
       ),
       child: Container(
         margin:
-            const EdgeInsets.only(bottom: 30, right: 24, left: 24, top: 16),
+            const EdgeInsets.only(bottom: 30, right: 24, left: 24),
         height: 63,
         decoration: const BoxDecoration(
             color: AppColors.blackAppColor,
