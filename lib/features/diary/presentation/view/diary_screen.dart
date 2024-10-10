@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:keep_fit/features/diary/presentation/widgets/calendar_widget.dart';
 import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
 import 'package:keep_fit/themes/colors.dart';
 
@@ -20,11 +21,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
       decoration: const BoxDecoration(
         gradient: AppColors.gradientApp
       ),
-      child: Column(
+      child: ListView(
         children: [
-          
+          CalendarWidget()
         ],
-      ),
+      )
     );
   }
 }

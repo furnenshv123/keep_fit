@@ -13,4 +13,7 @@ secondForGradient,
     firstForGradient,
     
   ]);
+  static const Color selectedDayColor = Color(0xff2D3435);
+  static const Color defaultDayColor = Color.fromRGBO(45, 52, 53, 0.8);
+  static const Color lunchIconColor = Color(0xffE35C54);
 }
