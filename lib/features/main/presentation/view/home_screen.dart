@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       routes: [DiaryRoute(), WeightRoute(), AuthNavigationRoute()],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
-        final ListOfIcons = [
+        const ListOfIcons = [
           AppIcons.vector__1_,
           AppIcons.weight,
           AppIcons.user_outline

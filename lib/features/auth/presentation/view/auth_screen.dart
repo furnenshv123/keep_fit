@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<AuthScreen> {
                 TextButton(
                     onPressed: () {
                         
-                        AutoRouter.of(context).replace(const SignInRoute());
+                        AutoRouter.of(context).push(const SignInRoute());
                     },
                     child: const Text(
                       'Sign in',

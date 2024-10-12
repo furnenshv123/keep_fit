@@ -70,7 +70,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 TextButton(
                     onPressed: () {
                         
-                        AutoRouter.of(context).replace(const AuthRoute());
+                        AutoRouter.of(context).navigate(const AuthRoute());
+                        
                     },
                     child: const Text(
                       'Sign up',

@@ -49,6 +49,7 @@ dependencies:
   spider: ^4.2.2
   table_calendar: ^3.1.2
   intl: ^0.19.0
+  fl_chart: ^0.69.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -92,6 +93,9 @@ flutter:
   assets:
     - assets/images/tape.png
   fonts:
+    - family: IconsApp
+      fonts:
+        - asset: assets/fonts/IconsApp.ttf
     - family: AppIcons
       fonts:
        - asset: assets/fonts/MyFlutterApp.ttf

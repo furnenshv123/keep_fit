@@ -13,7 +13,11 @@ secondForGradient,
     firstForGradient,
     
   ]);
+  static const Color colorForIconButtons = Color(0xff292B2C);
   static const Color selectedDayColor = Color(0xff2D3435);
   static const Color defaultDayColor = Color.fromRGBO(45, 52, 53, 0.8);
   static const Color lunchIconColor = Color(0xffE35C54);
+  static const Color colorForMealWidgets = Color(0xff444F50);
+  static const Color colorForBreakfast = Color(0xffE3B254);
+  static const Color colorForDinner = Color(0xffE39054);
 }

@@ -20,44 +20,50 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
           color: Color.fromRGBO(255, 255, 255, 0.8)),
-      child: TableCalendar(
-        
-        daysOfWeekStyle: const DaysOfWeekStyle(
-          weekdayStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 12),
-          weekendStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 12),
-        ),
-        rowHeight: 70,
-        startingDayOfWeek: StartingDayOfWeek.monday,
-        focusedDay: _focusedDay,
-        firstDay: DateTime.utc(2024, 9, 30),
-        lastDay: DateTime.utc(2034, 10, 30),
-        calendarFormat: CalendarFormat.week,
-        daysOfWeekVisible: true,
-        selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
-        availableGestures: AvailableGestures.all,
-        calendarBuilders: CalendarBuilders(
-          selectedBuilder: _selectedBuilder,
-          todayBuilder: _todayBuilder,
-          defaultBuilder: _defaultBuilder,
-          outsideBuilder: _defaultBuilder
-          
-        ),
-        onDaySelected: (selectedDay, focusedDay) {
-          if (!isSameDay(_selectedDay, selectedDay)) {
-            // Call `setState()` when updating the selected day
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-          }
-        },
-        headerStyle: const HeaderStyle(
-            formatButtonVisible: false,
-            leftChevronVisible: false,
-            rightChevronVisible: false,
-            titleCentered: true,
-            headerMargin: EdgeInsets.symmetric(vertical: 10),
-            titleTextStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 16)),
+      child: Column(
+        children: [
+          TableCalendar(
+            daysOfWeekStyle: const DaysOfWeekStyle(
+              weekdayStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 12),
+              weekendStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 12),
+            ),
+            rowHeight: 70,
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            focusedDay: _focusedDay,
+            firstDay: DateTime.utc(2024, 9, 30),
+            lastDay: DateTime.utc(2034, 10, 30),
+            calendarFormat: CalendarFormat.week,
+            daysOfWeekVisible: true,
+            selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
+            availableGestures: AvailableGestures.all,
+            calendarBuilders: CalendarBuilders(
+              selectedBuilder: _selectedBuilder,
+              todayBuilder: _todayBuilder,
+              defaultBuilder: _defaultBuilder,
+              outsideBuilder: _defaultBuilder
+              
+            ),
+            onDaySelected: (selectedDay, focusedDay) {
+              if (!isSameDay(_selectedDay, selectedDay)) {
+                // Call `setState()` when updating the selected day
+                setState(() {
+                  if(focusedDay.isBefore(DateTime.now())){
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                  }
+                });
+              }
+            },
+            headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                leftChevronVisible: false,
+                rightChevronVisible: false,
+                titleCentered: true,
+                headerMargin: EdgeInsets.symmetric(vertical: 10),
+                titleTextStyle: TextStyle(color: AppColors.selectedDayColor, fontFamily: "Hanken", fontSize: 16)),
+          ),
+
+        ],
       ),
     );
   }

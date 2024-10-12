@@ -20,7 +20,8 @@
 ///         Author:    Dave Gandy
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
-///
+
+
 import 'package:flutter/widgets.dart';
 
 class AppIcons {
@@ -32,4 +33,5 @@ class AppIcons {
   static const IconData user_outline = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData vector__1_ = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData weight = IconData(0xf496, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  
 }

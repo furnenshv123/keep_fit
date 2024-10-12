@@ -5,6 +5,7 @@ import 'package:keep_fit/resources/resources.dart';
 
 void main() {
   test('images assets test', () {
+    
     expect(File(Images.tape).existsSync(), isTrue);
   });
 }

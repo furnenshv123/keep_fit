@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:equatable/equatable.dart';
 import 'package:keep_fit/features/diary/domain/entities/ingredient_entity.dart';
 
@@ -6,9 +8,9 @@ class MealEntity extends Equatable {
   final int allCalories;
   final String name;
   final int allWeight;
-  final double allProteins;
-  final double allCarbohydrates;
-  final double allFats;
+  final int allProteins;
+  final int allCarbohydrates;
+  final int allFats;
   final List<IngredientEntity> ingredients;
   final DateTime date;
   MealEntity(
