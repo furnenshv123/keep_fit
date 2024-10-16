@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keep_fit/features/diary/presentation/bloc/bloc/calendar_bloc/bloc/calendar_bloc.dart';
 import 'package:keep_fit/themes/colors.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -15,6 +16,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   DateTime _focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: const BoxDecoration(
@@ -46,12 +48,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             onDaySelected: (selectedDay, focusedDay) {
               if (!isSameDay(_selectedDay, selectedDay)) {
                 // Call `setState()` when updating the selected day
+                if(focusedDay.isBefore(DateTime.now())){
+                context.read<CalendarBloc>().add(CalendarDaySelected(selectedDay: selectedDay));
                 setState(() {
-                  if(focusedDay.isBefore(DateTime.now())){
+                  
+                  
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
+                  
                   }
-                });
+                );
+                }
               }
             },
             headerStyle: const HeaderStyle(

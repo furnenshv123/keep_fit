@@ -1,18 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:keep_fit/config/locator/locator.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
-import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
+import 'package:keep_fit/features/auth/data/models/signin_user_req.dart';
+import 'package:keep_fit/features/auth/domain/usecases/auth/signin_usecase.dart';
 
 import '../../../../themes/colors.dart';
 import '../widgets/button_widget_app.dart';
 
 import '../widgets/text_field_widget.dart';
 
-
 @RoutePage()
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
-  
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -24,14 +25,10 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: AppColors.gradientApp
-      ),
+      decoration: const BoxDecoration(gradient: AppColors.gradientApp),
       padding: const EdgeInsets.all(20),
       child: ListView(
-        
         children: [
-          
           const Divider(),
           const Text(
             'Welcome!',
@@ -55,11 +52,29 @@ class _SignInScreenState extends State<SignInScreen> {
             controller: _passwordController,
             obscureMod: true,
           ),
-          const SizedBox(height: 30,),
-          const ButtonWidgetApp(labelText: 'Sign in', height: 56, width: double.infinity, fontSize: 25),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 30,
+          ),
+          ButtonWidgetApp(
+            labelText: 'Sign in',
+            height: 56,
+            width: double.infinity,
+            fontSize: 25,
+            onTap: () async{
+              var result = await getInstance<SigninUsecase>().call(SigninUserReq(
+                  email: _emailController.text,
+                  password: _passwordController.text));
+              result.fold((l){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l)));
+              }, (r){
+                AutoRouter.of(context).navigate(const DiaryRoute());
+              });
+            },
+          ),
+          const SizedBox(
+            height: 5,
+          ),
           Container(
-
             child: Row(
               children: [
                 const Text(
@@ -69,9 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 TextButton(
                     onPressed: () {
-                        
-                        AutoRouter.of(context).navigate(const AuthRoute());
-                        
+                      AutoRouter.of(context).navigate(const AuthRoute());
                     },
                     child: const Text(
                       'Sign up',

@@ -1,12 +1,16 @@
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:keep_fit/config/locator/locator.dart';
 
 import 'package:keep_fit/config/router/router.gr.dart';
+import 'package:keep_fit/features/auth/data/models/user_model.dart';
+import 'package:keep_fit/features/auth/domain/usecases/auth/signup_usecase.dart';
 
 import 'package:keep_fit/features/auth/presentation/widgets/button_widget_app.dart';
 
 import 'package:keep_fit/features/auth/presentation/widgets/text_field_widget.dart';
-import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
+
 import 'package:keep_fit/themes/colors.dart';
 
 @RoutePage()
@@ -25,14 +29,10 @@ class _ProfileScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: AppColors.gradientApp
-      ),
+      decoration: const BoxDecoration(gradient: AppColors.gradientApp),
       padding: const EdgeInsets.all(20),
       child: ListView(
-        
         children: [
-         
           const Divider(),
           const Text(
             'Welcome!',
@@ -64,11 +64,27 @@ class _ProfileScreenState extends State<AuthScreen> {
           const SizedBox(
             height: 30,
           ),
-          const ButtonWidgetApp(
-              labelText: 'Sign up',
-              height: 56,
-              width: double.infinity,
-              fontSize: 25),
+          ButtonWidgetApp(
+            labelText: 'Sign up',
+            height: 56,
+            width: double.infinity,
+            fontSize: 25,
+            onTap: () async {
+              var registration = await getInstance<SignupUsecase>().call(
+                  UserModel(
+                      username: _usernameController.text,
+                      password: _passwordController.text,
+                      email: _emailController.text));
+              registration.fold((l) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(l),
+                  behavior: SnackBarBehavior.floating,
+                ));
+              }, (r) {
+                AutoRouter.of(context).navigate(const DiaryRoute());
+              });
+            },
+          ),
           const SizedBox(
             height: 5,
           ),
@@ -82,8 +98,7 @@ class _ProfileScreenState extends State<AuthScreen> {
                 ),
                 TextButton(
                     onPressed: () {
-                        
-                        AutoRouter.of(context).push(const SignInRoute());
+                      AutoRouter.of(context).push(const SignInRoute());
                     },
                     child: const Text(
                       'Sign in',

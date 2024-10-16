@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_item.dart';
 import 'package:keep_fit/features/main/presentation/widgets/model_nav_bar.dart';
-import 'package:keep_fit/icons/app_icons.dart';
+
 import 'package:keep_fit/themes/colors.dart';
 
 class BottomNavBarWidget extends StatefulWidget {

@@ -7,11 +7,12 @@ class ButtonWidgetApp extends StatefulWidget {
       required this.labelText,
       required this.height,
       required this.width,
-      required this.fontSize});
+      required this.fontSize, required this.onTap, });
   final String labelText;
   final double height;
   final double width;
   final double fontSize;
+  final void Function() onTap;
   @override
   State<ButtonWidgetApp> createState() => _ButtonWidgetAppState();
 }
@@ -20,7 +21,7 @@ class _ButtonWidgetAppState extends State<ButtonWidgetApp> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: widget.onTap,
       child: Container(
         alignment: Alignment.center,
         height: widget.height,
