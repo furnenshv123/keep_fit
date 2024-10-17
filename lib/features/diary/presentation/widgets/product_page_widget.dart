@@ -24,6 +24,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
     widget.ingredients[index].proteins = (ingredient.proteins  / 100 * weight).toInt();
     widget.ingredients[index].name = ingredient.name;
     widget.ingredients[index].weight = weight;
+    print(widget.ingredients);
   }
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                     fats: 0,
                     urlPicture: '',
                     weight: 100));
+                
                 setState(() {
-                  print(widget.ingredients);
+                  
                 });
                 
               },

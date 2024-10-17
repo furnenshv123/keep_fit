@@ -17,5 +17,8 @@ class MealsBlocBloc extends Bloc<MealsBlocEvent, MealsBlocState> {
         emit(MealAcceptState(ingredient: data, index: event.index, weight: event.weight));
       });
     });
+    on<MealLoading>((event, emit) {
+      emit(MealsBlocLoaded());
+    },);
   }
 }

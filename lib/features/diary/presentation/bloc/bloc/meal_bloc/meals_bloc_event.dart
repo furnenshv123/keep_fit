@@ -7,9 +7,11 @@ sealed class MealsBlocEvent extends Equatable {
   List<Object> get props => [];
 }
 
+final class MealLoading extends MealsBlocEvent{}
+
 final class MealWeightPost extends MealsBlocEvent{
   final String name;
   final int weight;
-  final int index;
+  int index;
   MealWeightPost({required this.index, required this.name, required this.weight});
 }

@@ -24,7 +24,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       create: (context) => IngredientBloc()..add(IngredientGetEvent()),
       child: BlocBuilder<IngredientBloc, IngredientState>(
         builder: (context, state) {
-          context.watch<MealsBlocBloc>();
+          // context.watch<MealsBlocBloc>();
           if (state is IngerdientLoaded) {
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -78,8 +78,9 @@ class _ProductWidgetState extends State<ProductWidget> {
                       onChanged: (value) {
                         setState(() {
                           dropDownValue = value;
-                          
+                          context.read<MealsBlocBloc>().add(MealLoading());
                           context.read<MealsBlocBloc>().add(MealWeightPost(index: widget.index, name: value!, weight: widget.weight));
+                          
                         });
                       },
                     ),

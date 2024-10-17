@@ -19,9 +19,9 @@ final class MealsBlocLoaded extends MealsBlocState implements Equatable{
 
 final class MealAcceptState extends MealsBlocState{
   final IngredientEntity ingredient;
-  final int index;
+  int index;
   final int weight;
-  const MealAcceptState({required this.ingredient, required this.index, required this.weight});
+  MealAcceptState({required this.ingredient, required this.index, required this.weight});
 }
 
 final class MealLoadFailure extends MealsBlocState{}
