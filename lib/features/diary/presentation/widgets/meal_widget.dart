@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keep_fit/config/router/router.gr.dart';
 import 'package:keep_fit/features/diary/data/models/meal_model.dart';
 import 'package:keep_fit/features/diary/domain/entities/ingredient_entity.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/ingredient_bloc/ingredient_bloc.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/meal_bloc/meals_bloc_bloc.dart';
-import 'package:keep_fit/features/diary/presentation/widgets/sheet_product_widget.dart';
 
 import 'package:keep_fit/themes/colors.dart';
 
@@ -29,13 +30,14 @@ class MealWidget extends StatefulWidget {
 
 class _MealWidgetState extends State<MealWidget> {
   List<IngredientEntity> ingredients = [];
-  IngredientEntity basicIngredient = IngredientEntity(calories: 0, name: '', proteins: 0, carbohydrates: 0, fats: 0, urlPicture: '');
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MealsBlocBloc>(create: (context) => MealsBlocBloc()),
-        BlocProvider<IngredientBloc>(create: (context) => IngredientBloc()),],
+        BlocProvider<IngredientBloc>(create: (context) => IngredientBloc()),
+      ],
       // child: BlocBuilder<MealsBlocBloc, MealsBlocState>(
       //   builder: (context, state) {
       //     if(state is MealAcceptState){
@@ -96,7 +98,7 @@ class _MealWidgetState extends State<MealWidget> {
                         for (var element in ingredients) {
                           widget.model.allCalories += element.calories;
                           widget.model.allCarbohydrates +=
-                          element.carbohydrates;
+                              element.carbohydrates;
                           widget.model.allFats += element.fats;
                           widget.model.allProteins += element.proteins;
                         }
@@ -125,42 +127,7 @@ class _MealWidgetState extends State<MealWidget> {
                     IconButton(
                         splashColor: Colors.black,
                         onPressed: () {
-                          showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(40),
-                                topRight: Radius.circular(40.0),
-                              )),
-                              useSafeArea: true,
-                              builder: (context) {
-                                return DraggableScrollableSheet(
-                                  expand: false,
-                                  snap: true,
-                                  builder: (context, scrollController) {
-                                   
-                                    return ListView.builder(
-                                      controller: scrollController,
-                                      padding: const EdgeInsets.all(15),
-                                      itemCount: ingredients.length+1,
-                                      itemBuilder: (context, index) {
-                                        
-                                        if(index == ingredients.length+1){
-                                          return Container(child: IconButton(onPressed: (){
-                                            setState(() {
-                                              ingredients.add(basicIngredient);
-                                            });
-                                            
-                                          }, icon: const Icon(Icons.add),));
-                                        }
-
-                                        return SheetProductWidget();
-                                      },
-                                    );
-                                  },
-                                );
-                              });
+                          AutoRouter.of(context).push(ProductRouteWidget(ingredients: []));
                         },
                         icon: const Icon(
                           Icons.add,

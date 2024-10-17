@@ -20,4 +20,5 @@ secondForGradient,
   static const Color colorForMealWidgets = Color(0xff444F50);
   static const Color colorForBreakfast = Color(0xffE3B254);
   static const Color colorForDinner = Color(0xffE39054);
+  static const Color colorForFloating = Color(0xff446E46);
 }

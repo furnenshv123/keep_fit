@@ -16,6 +16,7 @@ class AppRouter extends RootStackRouter{
       ]),
       
     ]),
+    AutoRoute(page: ProductRouteWidget.page, path: '/')
   ];
 
 }

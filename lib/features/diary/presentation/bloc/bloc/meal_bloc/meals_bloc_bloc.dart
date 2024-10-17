@@ -14,7 +14,7 @@ class MealsBlocBloc extends Bloc<MealsBlocEvent, MealsBlocState> {
       resultIngredient.fold((l){
         emit(MealLoadFailure());
       }, (data){
-        emit(MealAcceptState(ingredient: data));
+        emit(MealAcceptState(ingredient: data, index: event.index, weight: event.weight));
       });
     });
   }

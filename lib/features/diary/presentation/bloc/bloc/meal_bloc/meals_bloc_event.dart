@@ -10,6 +10,6 @@ sealed class MealsBlocEvent extends Equatable {
 final class MealWeightPost extends MealsBlocEvent{
   final String name;
   final int weight;
-
-  MealWeightPost({required this.name, required this.weight});
+  final int index;
+  MealWeightPost({required this.index, required this.name, required this.weight});
 }
