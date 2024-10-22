@@ -18,6 +18,8 @@ import 'package:keep_fit/features/auth/presentation/view/sign_in_screen.dart'
     as _i6;
 import 'package:keep_fit/features/diary/domain/entities/ingredient_user_entity.dart'
     as _i10;
+import 'package:keep_fit/features/diary/presentation/bloc/bloc/meal_bloc/meals_bloc_bloc.dart'
+    as _i11;
 import 'package:keep_fit/features/diary/presentation/view/diary_screen.dart'
     as _i3;
 import 'package:keep_fit/features/diary/presentation/widgets/product_page_widget.dart'
@@ -125,12 +127,14 @@ class ProductRouteWidget extends _i8.PageRouteInfo<ProductRouteWidgetArgs> {
   ProductRouteWidget({
     _i9.Key? key,
     required List<_i10.IngredientUserEntity> ingredients,
+    required _i11.MealsBlocBloc valueBloc,
     List<_i8.PageRouteInfo>? children,
   }) : super(
           ProductRouteWidget.name,
           args: ProductRouteWidgetArgs(
             key: key,
             ingredients: ingredients,
+            valueBloc: valueBloc,
           ),
           initialChildren: children,
         );
@@ -144,6 +148,7 @@ class ProductRouteWidget extends _i8.PageRouteInfo<ProductRouteWidgetArgs> {
       return _i5.ProductPageWidget(
         key: args.key,
         ingredients: args.ingredients,
+        valueBloc: args.valueBloc,
       );
     },
   );
@@ -153,15 +158,18 @@ class ProductRouteWidgetArgs {
   const ProductRouteWidgetArgs({
     this.key,
     required this.ingredients,
+    required this.valueBloc,
   });
 
   final _i9.Key? key;
 
   final List<_i10.IngredientUserEntity> ingredients;
 
+  final _i11.MealsBlocBloc valueBloc;
+
   @override
   String toString() {
-    return 'ProductRouteWidgetArgs{key: $key, ingredients: $ingredients}';
+    return 'ProductRouteWidgetArgs{key: $key, ingredients: $ingredients, valueBloc: $valueBloc}';
   }
 }
 

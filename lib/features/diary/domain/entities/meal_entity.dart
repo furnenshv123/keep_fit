@@ -1,20 +1,21 @@
 
 
 import 'package:equatable/equatable.dart';
-import 'package:keep_fit/features/diary/domain/entities/ingredient_entity.dart';
+import 'package:keep_fit/features/diary/data/models/ingerdient_user_model.dart';
+import 'package:keep_fit/features/diary/data/models/meal_model.dart';
+import 'package:keep_fit/features/diary/domain/entities/ingredient_user_entity.dart';
 
 class MealEntity extends Equatable {
-  final int id;
-  final int allCalories;
-  final String name;
-  final int allWeight;
-  final int allProteins;
-  final int allCarbohydrates;
-  final int allFats;
-  final List<String> ingredients;
-  final DateTime date;
+  int allCalories;
+  String name;
+  int allWeight;
+  int allProteins;
+  int allCarbohydrates;
+  int allFats;
+  List<IngredientUserEntity> ingredients;
+  String date;
   MealEntity(
-      {required this.id,required this.ingredients,
+      {required this.ingredients,
       required this.allCalories,
       required this.name,
       required this.allWeight,
@@ -33,7 +34,14 @@ class MealEntity extends Equatable {
         allWeight,
         name,
         ingredients,
-        id,
         date
       ];
+}
+
+
+extension MaelEntityEx on MealEntity{
+  MealModel toModel(){
+    return MealModel(ingredients: ingredients.map((ingredient)=>ingredient.toModel()).toList(), allCalories: allCalories, name: name, allWeight: allWeight, allProteins: allProteins, allCarbohydrates: allCarbohydrates, allFats: allFats, date: date);
+  }
+  
 }

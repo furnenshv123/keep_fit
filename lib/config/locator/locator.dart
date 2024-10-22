@@ -13,6 +13,8 @@ import 'package:keep_fit/features/diary/domain/repositories/ingredient_repositor
 import 'package:keep_fit/features/diary/domain/repositories/meal_repository.dart';
 import 'package:keep_fit/features/diary/domain/usecases/get_all_ingredients_usecase.dart';
 import 'package:keep_fit/features/diary/domain/usecases/get_ingredient_by_name_usecase.dart';
+import 'package:keep_fit/features/diary/domain/usecases/get_meals_from_date_usecase.dart';
+import 'package:keep_fit/features/diary/domain/usecases/meal_add_usecase.dart';
 
 final getInstance = GetIt.instance;
 
@@ -27,4 +29,6 @@ Future<void> initializeDependencies() async{
   getInstance.registerSingleton<MealFirebaseService>(MealFirebaseServiceImpl());
   getInstance.registerSingleton<MealRepository>(MealRepositoryImpl());
   getInstance.registerSingleton<GetIngredientByNameUsecase>(GetIngredientByNameUsecase());
+  getInstance.registerSingleton<MealAddUsecase>(MealAddUsecase());
+  getInstance.registerSingleton<GetMealsFromDateUsecase>(GetMealsFromDateUsecase());
 }

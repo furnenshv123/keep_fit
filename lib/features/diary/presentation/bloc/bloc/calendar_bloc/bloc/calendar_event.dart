@@ -8,8 +8,20 @@ abstract class CalendarEvent extends Equatable {
 }
 
 
+class LoadingCalendarEvent extends CalendarEvent{}
+
+class InitialCalendarEvent extends CalendarEvent{
+  final DateTime selectedDay;
+
+  InitialCalendarEvent({required this.selectedDay});
+  @override
+  List<Object> get props => [selectedDay];
+}
+
 class CalendarDaySelected extends CalendarEvent{
   final DateTime selectedDay;
 
   CalendarDaySelected({required this.selectedDay});
+  @override
+  List<Object> get props => [selectedDay];
 }

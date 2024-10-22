@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:keep_fit/features/diary/data/models/ingerdient_user_model.dart';
 
 class IngredientUserEntity extends Equatable {
   int calories;
@@ -27,4 +28,11 @@ class IngredientUserEntity extends Equatable {
         urlPicture,
         weight,
       ];
+}
+
+extension IngredientUserEntityEx on IngredientUserEntity{
+  IngredientUserModel toModel(){
+    return IngredientUserModel(calories: calories, name: name, proteins: proteins, carbohydrates: carbohydrates, fats: fats, urlPicture: urlPicture, weight: weight);
+  }
+  
 }
