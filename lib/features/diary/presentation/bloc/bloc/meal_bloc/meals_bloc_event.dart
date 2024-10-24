@@ -20,17 +20,27 @@ final class MealWeightPost extends MealsBlocEvent{
 
 final class MealTransferDataEvent extends MealsBlocEvent{
   final List<IngredientUserEntity> ingredients;
-
+  
   MealTransferDataEvent({required this.ingredients});
   @override
   List<Object> get props => [ingredients];
 }
 
 
+
+final class MealDeleteProductEvent extends MealsBlocEvent{
+  final int index;
+
+  MealDeleteProductEvent({required this.index});
+}
+
 final class MealAddRemoteEvent extends MealsBlocEvent{
   final MealEntity entity;
-
   MealAddRemoteEvent({required this.entity});
   @override
   List<Object> get props => [entity];
 }
+
+final class MealUpdateEvent extends MealsBlocEvent{}
+
+final class MealAddProductEvent extends MealsBlocEvent{}

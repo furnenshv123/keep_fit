@@ -32,3 +32,7 @@ final class CalendarChangeDay extends CalendarState{
 final class CalendarLoadFailure extends CalendarState{
 
 }
+
+final class CalendarCountPerDayState extends CalendarState{
+  
+}

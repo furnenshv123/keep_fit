@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:keep_fit/features/diary/domain/entities/meal_entity.dart';
-import 'package:keep_fit/features/diary/domain/usecases/get_meals_from_date_usecase.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/calendar_bloc/bloc/calendar_bloc.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/meal_bloc/meals_bloc_bloc.dart';
 import 'package:keep_fit/features/diary/presentation/widgets/calendar_widget.dart';
@@ -32,78 +31,119 @@ class _DiaryScreenState extends State<DiaryScreen> {
 
   DateTime selectedDay = DateTime.now();
   List<MealEntity> listOfMeals = [];
-
+  int allCalories = 0;
+  int allProteins = 0;
+  int allFats = 0;
+  int allCarbohydrates = 0;
+  void countAllProperties(List<MealEntity> list){
+    allCalories = 0;
+    allProteins = 0;
+    allFats = 0;
+    allCarbohydrates = 0;
+    for (var element in list) {
+      allCalories += element.allCalories;
+      allCarbohydrates += element.allCarbohydrates;
+      allFats += element.allFats;
+      allProteins += element.allProteins;
+    }
+  }
   @override
   Widget build(BuildContext context) {
-   
-
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) {
-        final bloc = CalendarBloc();
-        bloc.add(InitialCalendarEvent(selectedDay: selectedDay));
-        return bloc;
-      
-      }),
-      BlocProvider(create: (context){
-        final mealBloc = MealsBlocBloc();
-        return mealBloc;
-      })]
-          ,
+      providers: [
+        BlocProvider(create: (context) {
+          final bloc = CalendarBloc();
+          bloc.add(InitialCalendarEvent(selectedDay: selectedDay));
+          return bloc;
+        }),
+        // BlocProvider(create: (context) {
+          
+        //   return mealBloc;
+        // })
+      ],
       child: Container(
           decoration: const BoxDecoration(gradient: AppColors.gradientApp),
           child: BlocBuilder<CalendarBloc, CalendarState>(
               builder: (context, state) {
+            if(state is CalendarCountPerDayState){
+              countAllProperties(listOfMeals);
+              return ListView(
+                children: [
+                  CalendarWidget(
+                    bloc: context.read<CalendarBloc>(),
+                  ),
+                  DataForDayWidget(
+                      calories: allCalories, carbs: allCarbohydrates, fats: allFats, prots: allProteins),
+                  Column(
+                    children: List.generate(listOfIcons.length, (index) {
+                      return MealWidget(
+                          // bloc: mealBloc,
+                          selectedDay: selectedDay,
+                          name: listOfNames[index],
+                          icon: listOfIcons[index],
+                          color: listOfColors[index],
+                          model: listOfMeals[index]);
+                    }),
+                  ),
+                ],
+              );
+            }
             if (state is InitCalendarState) {
               listOfMeals = state.listOfMeals;
+              countAllProperties(listOfMeals);
               return ListView(
-              children: [
-                CalendarWidget(
-                  bloc: context.read<CalendarBloc>(),
-                ),
-                DataForDayWidget(
-                    calories: 1000, carbs: 1000, fats: 1000, prots: 1000),
-                Column(
-                  children: List.generate(listOfIcons.length, (index) {
-                    return MealWidget(
-                      bloc: context.read<MealsBlocBloc>(),
-                        selectedDay: selectedDay,
-                        name: listOfNames[index],
-                        icon: listOfIcons[index],
-                        color: listOfColors[index],
-                        model: listOfMeals[index]);
-                  }),
-                ),
-              ],
-            );
+                children: [
+                  CalendarWidget(
+                    bloc: context.read<CalendarBloc>(),
+                  ),
+                  DataForDayWidget(
+                      calories: allCalories, carbs: allCarbohydrates, fats: allFats, prots: allProteins),
+                  Column(
+                    children: List.generate(listOfIcons.length, (index) {
+                      return MealWidget(
+                          // bloc: mealBloc,
+                          selectedDay: selectedDay,
+                          name: listOfNames[index],
+                          icon: listOfIcons[index],
+                          color: listOfColors[index],
+                          model: listOfMeals[index]);
+                    }),
+                  ),
+                ],
+              );
             }
             if (state is CalendarChangeDay) {
               selectedDay = state.selectedDay;
               listOfMeals = state.listOfMeals;
+              countAllProperties(listOfMeals);
               return ListView(
-              children: [
-                CalendarWidget(
-                  bloc: context.read<CalendarBloc>(),
-                ),
-                DataForDayWidget(
-                    calories: 1000, carbs: 1000, fats: 1000, prots: 1000),
-                Column(
-                  children: List.generate(listOfIcons.length, (index) {
-                    return MealWidget(
-                        bloc: context.read<MealsBlocBloc>(),
-                        selectedDay: selectedDay,
-                        name: listOfNames[index],
-                        icon: listOfIcons[index],
-                        color: listOfColors[index],
-                        model: listOfMeals[index]);
-                  }),
-                ),
-              ],
-            );
+                children: [
+                  CalendarWidget(
+                    bloc: context.read<CalendarBloc>(),
+                  ),
+                  DataForDayWidget(
+                      calories: allCalories, carbs: allCarbohydrates, fats: allFats, prots: allProteins),
+                  Column(
+                    children: List.generate(listOfIcons.length, (index) {
+                      return MealWidget(
+                          // bloc: mealBloc,
+                          selectedDay: selectedDay,
+                          name: listOfNames[index],
+                          icon: listOfIcons[index],
+                          color: listOfColors[index],
+                          model: listOfMeals[index]);
+                    }),
+                  ),
+                ],
+              );
             }
             if (state is CalendarLoadFailure) {
               return const Text('Error!');
             }
-            return const Center(child: CircularProgressIndicator(color: AppColors.blackAppColor,));
+            return const Center(
+                child: CircularProgressIndicator(
+              color: AppColors.blackAppColor,
+            ));
           })),
     );
   }

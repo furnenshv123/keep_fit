@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:keep_fit/config/locator/locator.dart';
 import 'package:keep_fit/features/diary/data/models/meal_model.dart';
@@ -12,7 +13,22 @@ part 'meals_bloc_event.dart';
 part 'meals_bloc_state.dart';
 
 class MealsBlocBloc extends Bloc<MealsBlocEvent, MealsBlocState> {
+
+
+  
+
+  
   MealsBlocBloc() : super(MealsBlocInitial()) {
+    on<MealAddProductEvent>((event, emit) {
+      emit(MealAddProductState());
+    },);
+    on<MealUpdateEvent>((event, emit) {
+      emit(MealUpdateState());
+    },);
+    on<MealDeleteProductEvent>((event, emit) {
+      emit(MealDeleteProductState(index: event.index));
+
+    },);
     on<MealWeightPost>((event, emit) async {
       var resultIngredient =
           await getInstance<GetIngredientByNameUsecase>().call(event.name);
@@ -45,4 +61,5 @@ class MealsBlocBloc extends Bloc<MealsBlocEvent, MealsBlocState> {
       },
     );
   }
+
 }

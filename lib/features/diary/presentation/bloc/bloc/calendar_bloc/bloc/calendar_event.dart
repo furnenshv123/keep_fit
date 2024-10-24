@@ -25,3 +25,7 @@ class CalendarDaySelected extends CalendarEvent{
   @override
   List<Object> get props => [selectedDay];
 }
+
+class CalendarCountPerDayEvent extends CalendarEvent{
+  
+}

@@ -53,7 +53,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               onDaySelected: (selectedDay, focusedDay) {
                 if (!isSameDay(_selectedDay, selectedDay)) {
                   // Call `setState()` when updating the selected day
-                  if (focusedDay.isBefore(DateTime.now())) {
+                  if (focusedDay.isBefore(DateTime.now()) || focusedDay.day == DateTime.now().day) {
                     context
                         .read<CalendarBloc>()
                         .add(CalendarDaySelected(selectedDay: selectedDay));

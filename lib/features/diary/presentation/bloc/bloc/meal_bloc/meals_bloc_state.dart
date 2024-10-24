@@ -28,14 +28,28 @@ final class MealAcceptState extends MealsBlocState{
 
 final class MealLoadFailure extends MealsBlocState{}
 
+final class MealDeleteProductState extends MealsBlocState{
+  final int index;
+
+  MealDeleteProductState({required this.index});
+  @override
+  // TODO: implement props
+  List<Object> get props => [index];
+}
+
 final class MealReCount extends MealsBlocState {
   final List<IngredientUserEntity> ingredients;
 
   MealReCount({required this.ingredients});
   @override
-  List<Object> get props=>[ingredients];
+  // TODO: implement props
+  List<Object> get props => [ingredients];
 }
 
 final class MealAddRemoteDataState extends MealsBlocState{
   
 }
+
+final class MealUpdateState extends MealsBlocState{}
+
+final class MealAddProductState extends MealsBlocState{}

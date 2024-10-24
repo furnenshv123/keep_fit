@@ -1,27 +1,29 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
 
 import 'package:keep_fit/features/diary/domain/entities/meal_entity.dart';
+import 'package:keep_fit/features/diary/presentation/bloc/bloc/calendar_bloc/bloc/calendar_bloc.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/ingredient_bloc/ingredient_bloc.dart';
 import 'package:keep_fit/features/diary/presentation/bloc/bloc/meal_bloc/meals_bloc_bloc.dart';
 
 import 'package:keep_fit/themes/colors.dart';
 
 class MealWidget extends StatefulWidget {
-  MealWidget(
-      {super.key,
-      required this.name,
-      required this.icon,
-      required this.model,
-      required this.color,
-      required this.selectedDay,
-      required this.bloc});
+  MealWidget({
+    super.key,
+    required this.name,
+    required this.icon,
+    required this.model,
+    required this.color,
+    required this.selectedDay,
+  });
 
   MealEntity model;
-  MealsBlocBloc bloc;
+  // MealsBlocBloc bloc;
   final String name;
   final IconData icon;
   final Color color;
@@ -31,13 +33,11 @@ class MealWidget extends StatefulWidget {
 }
 
 class _MealWidgetState extends State<MealWidget> {
-  @override
-
+  bool _isExpanded = false;
   @override
   Widget build(BuildContext context) {
-    
-    return BlocProvider.value(
-      value: widget.bloc,
+    return BlocProvider(
+      create: (context) => MealsBlocBloc(),
       child: BlocBuilder<MealsBlocBloc, MealsBlocState>(
         builder: (context, state) {
           if (state is MealReCount) {
@@ -48,7 +48,9 @@ class _MealWidgetState extends State<MealWidget> {
             widget.model.allCarbohydrates = 0;
             widget.model.allWeight = 0;
             widget.model.ingredients = state.ingredients;
-            widget.model.date = widget.selectedDay.day.toString() + widget.selectedDay.month.toString() + widget.selectedDay.year.toString();
+            widget.model.date = widget.selectedDay.day.toString() +
+                widget.selectedDay.month.toString() +
+                widget.selectedDay.year.toString();
             widget.model.name = widget.name;
             for (var calories in widget.model.ingredients) {
               widget.model.allCalories += calories.calories;
@@ -58,7 +60,10 @@ class _MealWidgetState extends State<MealWidget> {
               widget.model.allCarbohydrates += calories.carbohydrates;
             }
             // mealBloc.add(MealLoading());
-            widget.bloc.add(MealAddRemoteEvent(entity: widget.model));
+            context
+                .read<MealsBlocBloc>()
+                .add(MealAddRemoteEvent(entity: widget.model));
+            context.read<CalendarBloc>().add(CalendarCountPerDayEvent());
           }
           return Container(
             padding: const EdgeInsets.all(30),
@@ -117,7 +122,8 @@ class _MealWidgetState extends State<MealWidget> {
                             splashColor: Colors.black,
                             onPressed: () {
                               AutoRouter.of(context).push(ProductRouteWidget(
-                                  ingredients: widget.model.ingredients ?? [], valueBloc: context.read<MealsBlocBloc>()));
+                                  ingredients: widget.model.ingredients ?? [],
+                                  valueBloc: context.read<MealsBlocBloc>()));
                             },
                             icon: const Icon(
                               Icons.add,
@@ -152,9 +158,17 @@ class _MealWidgetState extends State<MealWidget> {
                           fontSize: 22,
                           color: Colors.white),
                     ),
-                    DropdownButton(
-                      items: [DropdownMenuItem(child: Container())],
-                      onChanged: (value) {},
+                    Container(
+                      
+                      child: DropdownButton(
+                        underline: SizedBox(),
+                        icon: Icon(Icons.arrow_drop_down),
+                        hint: Container(),
+                        items: [
+                          
+                        ],
+                        onChanged: (value) {},
+                      ),
                     )
                   ],
                 )

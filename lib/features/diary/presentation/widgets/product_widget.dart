@@ -6,7 +6,11 @@ import 'package:keep_fit/features/diary/presentation/bloc/bloc/meal_bloc/meals_b
 import 'package:keep_fit/themes/colors.dart';
 
 class ProductWidget extends StatefulWidget {
-  ProductWidget({super.key, required this.name, required this.weight, required this.index});
+  ProductWidget(
+      {super.key,
+      required this.name,
+      required this.weight,
+      required this.index});
   String name;
   int weight;
   int index;
@@ -17,7 +21,7 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   String? dropDownValue;
   final weightController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -34,16 +38,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(40)
-                    ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(40)),
                     child: DropdownButton(
                       iconEnabledColor: Colors.black,
                       underline: Container(
                         decoration: const BoxDecoration(
                           color: Colors.white,
-                          
-                          
                         ),
                       ),
                       borderRadius: BorderRadius.circular(40),
@@ -79,11 +80,24 @@ class _ProductWidgetState extends State<ProductWidget> {
                         setState(() {
                           dropDownValue = value;
                           context.read<MealsBlocBloc>().add(MealLoading());
-                          context.read<MealsBlocBloc>().add(MealWeightPost(index: widget.index, name: value!, weight: widget.weight));
-                          
+                          context.read<MealsBlocBloc>().add(MealWeightPost(
+                              index: widget.index,
+                              name: value!,
+                              weight: widget.weight));
                         });
                       },
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      context
+                          .read<MealsBlocBloc>()
+                          .add(MealDeleteProductEvent(index: widget.index));
+                    },
+                    icon: const Icon(Icons.cancel),
+                    color: AppColors.lunchIconColor,
+                    iconSize: 45,
+                    splashColor: AppColors.blackAppColor,
                   ),
                   ElevatedButton(
                       style: const ButtonStyle(
@@ -104,6 +118,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                       fontFamily: "Hanken",
                                       fontSize: 22)),
                               content: TextField(
+                                autofocus: true,
                                 cursorColor: AppColors.blackAppColor,
                                 decoration: const InputDecoration(
                                     filled: true,
@@ -130,13 +145,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                                             fontSize: 15))),
                                 TextButton(
                                     onPressed: () {
-
-                                      widget.weight = int.parse(weightController.text);
-                                      setState(() {
-                                        
-                                      });
+                                      widget.weight =
+                                          int.parse(weightController.text);
+                                      setState(() {});
                                       Navigator.of(context).pop();
-                                      
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(6),

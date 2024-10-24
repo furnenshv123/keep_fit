@@ -41,6 +41,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
           if (state is MealAcceptState) {
             changeIngredient(state.index, state.ingredient, state.weight);
           }
+          if(state is MealDeleteProductState){
+            widget.ingredients.removeAt(state.index);
+          }
           return PopScope(
             onPopInvoked: (didPop) {
               print(didPop);
@@ -82,8 +85,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       fats: 0,
                       urlPicture: '',
                       weight: 100));
-
-                  setState(() {});
+                  context.read<MealsBlocBloc>().add(MealAddProductEvent());
                 },
                 shape: const CircleBorder(),
                 child: const Icon(

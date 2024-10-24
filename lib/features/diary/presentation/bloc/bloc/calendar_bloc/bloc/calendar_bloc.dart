@@ -10,6 +10,11 @@ part 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   CalendarBloc() : super(CalendarInitial()) {
+    on<CalendarCountPerDayEvent>(
+      (event, emit) {
+        emit(CalendarCountPerDayState());
+      },
+    );
     on<LoadingCalendarEvent>(
       (event, emit) {
         emit(CalendarLoadedState());
@@ -27,7 +32,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             listOfMeals.add(MealEntity(
                 ingredients: [],
                 allCalories: 0,
-                name: 'name',
+                name: '',
                 allWeight: 0,
                 allProteins: 0,
                 allCarbohydrates: 0,
@@ -40,7 +45,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           listOfMeals.add(MealEntity(
               ingredients: [],
               allCalories: 0,
-              name: 'name',
+              name: '',
               allWeight: 0,
               allProteins: 0,
               allCarbohydrates: 0,
@@ -48,12 +53,12 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
               date: event.selectedDay.day.toString() +
                   event.selectedDay.month.toString() +
                   event.selectedDay.year.toString()));
-        }else if (listOfMeals.length == 0) {
+        } else if (listOfMeals.length == 0) {
           for (var i = 0; i < 3; i++) {
             listOfMeals.add(MealEntity(
                 ingredients: [],
                 allCalories: 0,
-                name: 'name',
+                name: '',
                 allWeight: 0,
                 allProteins: 0,
                 allCarbohydrates: 0,
@@ -66,9 +71,20 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         List<String> priorityOrder = ['Breakfast', 'Lunch', 'Dinner'];
         listOfMeals.sort(
           (a, b) {
-            int indexA = priorityOrder.indexOf(a.name);
-            int indexB = priorityOrder.indexOf(b.name);
-            return indexA.compareTo(indexB);
+            int priority(String name) {
+              switch (name) {
+                case 'Breakfast':
+                  return 0;
+                case 'Lunch':
+                  return 1;
+                case 'Dinner':
+                  return 2;
+                default:
+                  return 3;
+              }
+            }
+
+            return priority(a.name!).compareTo(priority(b.name!));
           },
         );
         emit(CalendarChangeDay(
@@ -88,7 +104,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             listOfMeals.add(MealEntity(
                 ingredients: [],
                 allCalories: 0,
-                name: 'name',
+                name: '',
                 allWeight: 0,
                 allProteins: 0,
                 allCarbohydrates: 0,
@@ -102,7 +118,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             listOfMeals.add(MealEntity(
                 ingredients: [],
                 allCalories: 0,
-                name: 'name',
+                name: '',
                 allWeight: 0,
                 allProteins: 0,
                 allCarbohydrates: 0,
@@ -115,7 +131,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           listOfMeals.add(MealEntity(
               ingredients: [],
               allCalories: 0,
-              name: 'name',
+              name: '',
               allWeight: 0,
               allProteins: 0,
               allCarbohydrates: 0,
@@ -128,7 +144,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             listOfMeals.add(MealEntity(
                 ingredients: [],
                 allCalories: 0,
-                name: 'name',
+                name: '',
                 allWeight: 0,
                 allProteins: 0,
                 allCarbohydrates: 0,
@@ -141,9 +157,20 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         List<String> priorityOrder = ['Breakfast', 'Lunch', 'Dinner'];
         listOfMeals.sort(
           (a, b) {
-            int indexA = priorityOrder.indexOf(a.name);
-            int indexB = priorityOrder.indexOf(b.name);
-            return indexA.compareTo(indexB);
+            int priority(String name) {
+              switch (name) {
+                case 'Breakfast':
+                  return 0;
+                case 'Lunch':
+                  return 1;
+                case 'Dinner':
+                  return 2;
+                default:
+                  return 3;
+              }
+            }
+
+            return priority(a.name!).compareTo(priority(b.name!));
           },
         );
         emit(InitCalendarState(listOfMeals: listOfMeals));
