@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:keep_fit/config/router/guards/auth_guard.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
 
 
@@ -10,11 +11,11 @@ class AppRouter extends RootStackRouter{
     AutoRoute(page: HomeRoute.page, path: '/', children: [
       AutoRoute(page: DiaryRoute.page, path: 'diary'),
       AutoRoute(page: WeightRoute.page, path: 'weight'),
-      AutoRoute(page: AuthNavigationRoute.page, path: 'navigation', children: [
+      AutoRoute(page: AuthNavigationRoute.page, initial: true, path: 'navigation', children: [
         AutoRoute(page: AuthRoute.page, path: 'signup', initial: true),
         AutoRoute(page: SignInRoute.page, path: 'signin')
       ]),
-      
+      AutoRoute(page: ProfileRoute.page, path: 'profile')
     ]),
     AutoRoute(page: ProductRouteWidget.page, path: '/')
   ];

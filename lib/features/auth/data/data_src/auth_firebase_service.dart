@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:keep_fit/features/auth/data/models/signin_user_req.dart';
 import 'package:keep_fit/features/auth/data/models/user_model.dart';
 
@@ -38,6 +39,11 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService{
       FirebaseFirestore.instance.collection('Users').doc(userData.user?.uid).set({
         'email': userData.user?.email,
         'username': model.username
+      });
+      FirebaseFirestore.instance.collection('Users').doc(userData.user?.uid).collection('Target').add({
+        'startWeight':model.startWeight,
+        'endWeight':model.endWeight,
+        'startDate':DateFormat.yMMMd().format(DateTime.now())
       });
       return const Right('Signup was succesfull!');
     }on FirebaseAuthException catch(e){

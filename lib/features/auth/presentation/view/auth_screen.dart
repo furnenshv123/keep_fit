@@ -25,6 +25,8 @@ class _ProfileScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
+  final _startWeightController = TextEditingController();
+  final _endWeightController = TextEditingController();
   bool changeMode = true;
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,23 @@ class _ProfileScreenState extends State<AuthScreen> {
             obscureMod: true,
           ),
           const SizedBox(
+            height: 25,
+          ),
+          TextFieldWidget(
+            textLabel: 'Start weight',
+            controller: _startWeightController,
+            
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          
+        
+          TextFieldWidget(
+            textLabel: 'End weight',
+            controller: _endWeightController,
+          ),
+          const SizedBox(
             height: 30,
           ),
           ButtonWidgetApp(
@@ -72,9 +91,12 @@ class _ProfileScreenState extends State<AuthScreen> {
             onTap: () async {
               var registration = await getInstance<SignupUsecase>().call(
                   UserModel(
+                      startWeight: double.parse(_startWeightController.text),
+                      endWeight: double.parse(_endWeightController.text),
                       username: _usernameController.text,
                       password: _passwordController.text,
-                      email: _emailController.text));
+                      email: _emailController.text,
+                      ));
               registration.fold((l) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(l),

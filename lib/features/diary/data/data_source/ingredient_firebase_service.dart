@@ -8,7 +8,7 @@ abstract class IngredientFirebaseService {
   Future<Either> getIngredientByName(String name);
 }
 
-class IngredientFirebaseServiceImpl extends IngredientFirebaseService{
+class IngredientFirebaseServiceImpl implements IngredientFirebaseService{
   @override
   Future<Either> getAllIngredients() async{
     try {

@@ -9,7 +9,7 @@ abstract class MealFirebaseService {
   Future<Either> addMeals(MealModel meal);
 }
 
-class MealFirebaseServiceImpl extends MealFirebaseService {
+class MealFirebaseServiceImpl implements MealFirebaseService {
   @override
   Future<Either> addMeals(MealModel meal) async {
     try {

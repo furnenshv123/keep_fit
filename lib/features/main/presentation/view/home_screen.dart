@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_fit/config/router/router.gr.dart';
-import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_item.dart';
 import 'package:keep_fit/features/main/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:keep_fit/features/main/presentation/widgets/main_logo_app.dart';
 import 'package:keep_fit/features/main/presentation/widgets/model_nav_bar.dart';
 import 'package:keep_fit/icons/app_icons.dart';
-import 'package:keep_fit/themes/colors.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
