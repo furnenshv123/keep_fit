@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:keep_fit/features/auth/data/data_src/auth_firebase_service.dart';
 import 'package:keep_fit/features/auth/data/repositories/auth_repository_impl.dart';
@@ -20,6 +21,8 @@ import 'package:keep_fit/features/weight/domain/repositories/weight_repository.d
 import 'package:keep_fit/features/weight/domain/usecases/add_new_weight_usecase.dart';
 import 'package:keep_fit/features/weight/domain/usecases/get_all_weights_usecase.dart';
 import 'package:keep_fit/features/weight/domain/usecases/get_target_usecase.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 final getInstance = GetIt.instance;
 
@@ -47,4 +50,15 @@ Future<void> initializeDependencies() async {
   getInstance.registerSingleton<GetTargetUsecase>(GetTargetUsecase());
   getInstance.registerSingleton<AddNewWeightUsecase>(AddNewWeightUsecase());
   getInstance.registerSingleton<GetAllWeightsUsecase>(GetAllWeightsUsecase());
+  final talker = TalkerFlutter.init();
+  getInstance.registerSingleton<Talker>(talker);
+  Bloc.observer = TalkerBlocObserver(
+    talker: talker,
+    settings: const TalkerBlocLoggerSettings(
+      printEvents: true,
+      printClosings: true,
+      printCreations: true
+    )
+  );
+  
 }

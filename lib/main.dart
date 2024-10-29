@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keep_fit/config/locator/locator.dart';
 import 'package:keep_fit/config/router/router.dart';
 import 'package:keep_fit/firebase_options.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +24,18 @@ class KeepFitApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
+      
       theme: ThemeData(
       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routerConfig: _router.config(),
+      routerConfig: _router.config(
+        navigatorObservers: () => [
+          TalkerRouteObserver(getInstance<Talker>())
+        ],
+      ),
+      
     );
   }
 }
